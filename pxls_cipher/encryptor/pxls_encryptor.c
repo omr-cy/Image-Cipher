@@ -1,4 +1,4 @@
-#include "../helpers.h"
+#include "pxls_encryptor.h"
 
 pixle encrypt_pxl(pixle pxl, affkey key)
 {
