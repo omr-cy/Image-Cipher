@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
     if (argc != 3)
     {
         printf("Usage: enCipher pixle password\n");
+        printf("Hint : enCipher 56,255,69 pass123!!\n");
         return 1;
     }
     pixle pxl = str_to_pixle(argv[1]);
