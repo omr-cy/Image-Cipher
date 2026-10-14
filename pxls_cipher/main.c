@@ -1,4 +1,5 @@
 #include "encryptor/pxls_encryptor.h"
+#include "helpers.h"
 // #include "decryptor/pxls_decryptor.h"
 
 // The Main App
@@ -7,26 +8,52 @@ int main(int argc, char *argv[])
     if (argc != 4)
     {
         printf("Usage: pxls_cipher action pixles password\n");
-        printf("Hint : pxls_cipher encrypt (56,255,69)(56,255,69)(56,255,69) pass123!!\n");
+        printf("Hint : pxls_cipher encrypt 56,95,69/56,245,69/123,255,233 pass123!!\n");
         return 1;
     }
-    else if (strcmp(argv[1], "encrypt") == 0)
+    // Make const of action because it must be unchanged
+    const char *action = argv[1];
+
+    // Getting the number of the pixles
+    int pxls_num = get_pxls_number(argv[2]);
+
+    // Parsing text to get pixles
+    pixle *pxls = parse_pxls(argv[2], pxls_num);
+
+    // Generating the Key
+    affkey key = generate_key(argv[2]);
+
+    // If the action is Encrypt:
+    if (strcmp(action, "encrypt") == 0 || strcmp(action, "e") == 0)
     {
-        pixle pxl = str_to_pixle(argv[2]);
-        affkey key = generate_key(argv[3]);
-        pixle encrypted_pxl = encrypt_pxl(pxl, key);
+        // Encrypt the pixles with the affin cipher
+        pixle *encrypted_pxls = encrypt_pxls(pxls, pxls_num, key);
+
+        // Free what i allocate with my self
+        free(pxls);
+        pxls = encrypted_pxls;
     }
-    else if (strcmp(argv[1], "decrypt") == 0)
+    else if (strcmp(action, "decrypt") == 0 || strcmp(action, "d") == 0)
     {
-        pixle pxl = str_to_pixle(argv[2]);
-        affkey key = generate_key(argv[3]);
-        // pixle encrypted_pxl = encrypt_pxl(pxl, key);
-    }
-    else
-    {
-        printf("The available actions is (encrypt or decrypt).\n");
-        return 1;
+        // Encrypt the pixles with the affin cipher
+        // pixle *decrypted_pxls = decrypt_pxls(pxls, pxls_num, key);
+
+        // Free what i allocate with my self
+        free(pxls);
+        // pxls = decrypted_pxls;
     }
 
+    // Make output
+    char *output = concatenate_pxls(pxls, pxls_num);
+
+    // Print the output
+    if (output != NULL)
+    {
+        printf("%s\n", output);
+    }
+
+    // Free what i allocate with my self
+    free(output);
+    free(pxls);
     return 0;
 }

@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "sha256_c/sha256.h"
 
 // Create a Pexle Structuer:
@@ -22,5 +23,9 @@ typedef struct {
 // Define the Functions Prototypes
 pixle str_to_pixle(char *rgb);
 affkey generate_key(char *password);
+int get_pxls_number(char *pxls_txt);
+pixle* parse_pxls(char *text, int pxls_num);
+char* concatenate_pxls(pixle pxls[], int pxls_len);
+void print_pxls_for_debugging(pixle pxls[], int pxls_num);
 
 #endif
