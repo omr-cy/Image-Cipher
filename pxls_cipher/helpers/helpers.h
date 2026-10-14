@@ -21,11 +21,11 @@ typedef struct {
 } affkey;
 
 // Define the Functions Prototypes
-pixle str_to_pixle(char *rgb);
+pixle str_to_pxl(char *rgb);
 affkey generate_key(char *password);
-int get_pxls_number(char *pxls_txt);
-pixle* parse_pxls(char *text, int pxls_num);
+int get_pxls_len(char *pxls_txt);
+pixle* parse_pxls(char *text, int pxls_len);
 char* concatenate_pxls(pixle pxls[], int pxls_len);
-void print_pxls_for_debugging(pixle pxls[], int pxls_num);
+void print_pxls_for_debugging(pixle pxls[], int pxls_len);
 
 #endif

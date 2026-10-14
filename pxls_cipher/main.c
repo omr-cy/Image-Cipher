@@ -5,10 +5,10 @@
 char* pxls_cipher(const char *action, char *pixles, char *password)
 {
     // Getting the number of the pixles
-    int pxls_num = get_pxls_number(pixles);
+    int pxls_len = get_pxls_len(pixles);
 
     // Parsing text to get pixles
-    pixle *pxls = parse_pxls(pixles, pxls_num);
+    pixle *pxls = parse_pxls(pixles, pxls_len);
 
     // Generating the Key
     affkey key = generate_key(password);
@@ -17,7 +17,7 @@ char* pxls_cipher(const char *action, char *pixles, char *password)
     if (strcmp(action, "encrypt") == 0 || strcmp(action, "e") == 0)
     {
         // Encrypt the pixles with the affin cipher
-        pixle *encrypted_pxls = encrypt_pxls(pxls, pxls_num, key);
+        pixle *encrypted_pxls = encrypt_pxls(pxls, pxls_len, key);
 
         // Free what i allocate with my self
         free(pxls);
@@ -27,7 +27,7 @@ char* pxls_cipher(const char *action, char *pixles, char *password)
     else if (strcmp(action, "decrypt") == 0 || strcmp(action, "d") == 0)
     {
         // Encrypt the pixles with the affin cipher
-        // pixle *decrypted_pxls = decrypt_pxls(pxls, pxls_num, key);
+        // pixle *decrypted_pxls = decrypt_pxls(pxls, pxls_len, key);
 
         // Free what i allocate with my self
         free(pxls);
@@ -35,7 +35,8 @@ char* pxls_cipher(const char *action, char *pixles, char *password)
     }
 
     // Make output
-    char *output = concatenate_pxls(pxls, pxls_num);
+    char *output = concatenate_pxls(pxls, pxls_len);
+    // char *output = "lol";
 
     // Print the output
     if (output == NULL)
@@ -52,7 +53,7 @@ char* pxls_cipher(const char *action, char *pixles, char *password)
 // The Main App for CLI
 int main(int argc, char *argv[])
 {
-    if (argc != 4)
+    if (argc != 5)
     {
         printf("Usage: pxls_cipher action pixles password\n");
         printf("Hint : pxls_cipher encrypt 56,95,69/56,245,69/123,255,233 pass123!!\n");

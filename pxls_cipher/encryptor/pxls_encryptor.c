@@ -18,11 +18,11 @@ pixle encrypt_pxl(pixle pxl, affkey key)
     return encrypted_pxl;
 }
 
-pixle* encrypt_pxls(pixle pxls[], int pxls_num, affkey key)
+pixle* encrypt_pxls(pixle pxls[], int pxls_len, affkey key)
 {
-    pixle *encrypted_pxls = malloc(sizeof(pixle ) * pxls_num);
+    pixle *encrypted_pxls = malloc(sizeof(pixle) * pxls_len);
 
-    for (int i = 0; i < pxls_num; i++)
+    for (int i = 0; i < pxls_len; i++)
     {
         encrypted_pxls[i] = encrypt_pxl(pxls[i], key);
     }

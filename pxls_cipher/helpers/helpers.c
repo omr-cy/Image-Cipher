@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 // Convert the Input string to Pixle
-pixle str_to_pixle(char *rgb)
+pixle str_to_pxl(char *rgb)
 {
     // atoi() // String to an Integer
     // strtok() // String Splitter
@@ -40,72 +40,76 @@ affkey generate_key(char *password)
     return key;
 }
 
-int get_pxls_number(char *pxls_txt)
+int get_pxls_len(char *pxls_txt)
 {
-    char *pixles = pxls_txt;
-    int pxls_num = 1;
-    for (int i = 0, slen = strlen(pixles); i < slen; i++)
+    int pxls_len = 1;
+    for (int i = 0, slen = strlen(pxls_txt); i < slen; i++)
     {
-        if (pixles[i] == '/')
+        if (pxls_txt[i] == '/')
         {
-            pxls_num += 1;
+            pxls_len += 1;
         }
     }
-    return pxls_num;
+    // printf("Pixles len in C: %i\n", pxls_len);
+    return pxls_len;
 }
 
-pixle* parse_pxls(char *text, int pxls_num)
+pixle* parse_pxls(char *pxls_txt, int pxls_len)
 {
     // Loob to parse the pixles
-    char *str_pxls[pxls_num];
-    if (pxls_num > 1)
+    char *pxls_str[pxls_len];
+    if (pxls_len > 1)
     {
-        char *pxl = strtok(text, "/");
-        for (int i = 0; i < pxls_num; i++)
+        char *pxl = strtok(pxls_txt, "/");
+        for (int i = 0; i < pxls_len; i++)
         {
-            str_pxls[i] = pxl;
+            pxls_str[i] = pxl;
             pxl = strtok(NULL, "/");
         }
     }
     else
     {
-        str_pxls[0] = text;
+        pxls_str[0] = pxls_txt;
     }
     // Convert the string pixles to a pixle type
-    pixle *pxls = malloc(sizeof(pixle) * pxls_num);
-    for (int i = 0; i < pxls_num; i++)
+    pixle *pxls = malloc(sizeof(pixle) * pxls_len);
+    for (int i = 0; i < pxls_len; i++)
     {
-        pxls[i] = str_to_pixle(str_pxls[i]);
+        pxls[i] = str_to_pxl(pxls_str[i]);
     }
     return pxls;
 }
 
-char* concatenate_pxls(pixle pxls[], int pxls_num)
+char* concatenate_pxls(pixle pxls[], int pxls_len)
 {
-    char *output = malloc(sizeof(char));
-    output[0] = '\0'; // Cleaning the garbage values
+    char *output = malloc(sizeof(pixle) * pxls_len);
+    // Cleaning the garbage values
+    for (int i = 0; i < sizeof(pixle) * pxls_len; i++)
+    {
+        output[i] = '\0';
+    }
 
     char pxl[20];
-    for (int i = 0; i < pxls_num; i++)
+    for (int i = 0; i < pxls_len; i++)
     {
-        if (i + 1 == pxls_num)
+        if (i + 1 != pxls_len)
         {
-            sprintf(pxl, "%i,%i,%i", pxls[i].red, pxls[i].green, pxls[i].blue);
+            sprintf(pxl, "%i,%i,%i/", pxls[i].red, pxls[i].green, pxls[i].blue);
         }
         else
         {
-            sprintf(pxl, "%i,%i,%i/", pxls[i].red, pxls[i].green, pxls[i].blue);
+            sprintf(pxl, "%i,%i,%i", pxls[i].red, pxls[i].green, pxls[i].blue);
         }
         strcat(output, pxl);
     }
     return output;
 }
 
-void print_pxls_for_debugging(pixle pxls[], int pxls_num)
+void print_pxls_for_debugging(pixle pxls[], int pxls_len)
 {
     // Printing the value for debugging
     char pxl[25];
-    for (int i = 0; i < pxls_num; i++)
+    for (int i = 0; i < pxls_len; i++)
     {
         sprintf(pxl, "Pixle %i: %i,%i,%i", i, pxls[i].red, pxls[i].green, pxls[i].blue);
         printf("%s\n", pxl);

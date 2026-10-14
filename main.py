@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from ctypes import CDLL, c_char_p
+from ctypes import CDLL, c_char_p, c_int
 
 # get the code of pxls_cipher
 pxls_cipher = CDLL("./pxls_cipher/pxls_cipher.so").pxls_cipher
@@ -10,7 +10,12 @@ pxls_cipher.argtypes = [c_char_p, c_char_p, c_char_p]
 pxls_cipher.restype  = c_char_p
 
 # run the function
-result_bytes = pxls_cipher(b"e", b"56,95,69/56,245,69/123,255,233", b"pass123")
+action = b"e"
+pixles = (b"56,95,69/"*300).strip(b'/')
+passwd = b"pass123"
+
+result_bytes = pxls_cipher(action, pixles, passwd)
+
 
 # print the results
 if result_bytes:
