@@ -4,7 +4,7 @@
 // X = ((a^-1) * (c-b)) mod 26
 // ---------------------------
 
-pixle decrypt_pxl(pixle pxl, affkey key)
+pixle decrypt_pxl(pixle pxl, int key)
 {
     // pixle decrypted_pxl; // Decrypted Pixle
     // decrypted_pxl.red = ((key.a^-1) * (pxl.red - key.b)) % 256;

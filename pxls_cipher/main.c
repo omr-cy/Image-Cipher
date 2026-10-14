@@ -1,5 +1,5 @@
 #include "encryptor/pxls_encryptor.h"
-#include "decryptor/pxls_decryptor.h"
+// #include "decryptor/pxls_decryptor.h"
 
 // The Main App for Python
 char* pxls_cipher(const char *action, char *pixles, char *password)
@@ -11,7 +11,7 @@ char* pxls_cipher(const char *action, char *pixles, char *password)
     pixle *pxls = parse_pxls(pixles, pxls_len);
 
     // Generating the Key
-    affkey key = generate_key(password);
+    int key = generate_key(password);
 
     // If the action is Encrypt:
     if (strcmp(action, "encrypt") == 0 || strcmp(action, "e") == 0)
@@ -28,10 +28,12 @@ char* pxls_cipher(const char *action, char *pixles, char *password)
     {
         // Encrypt the pixles with the affin cipher
         // pixle *decrypted_pxls = decrypt_pxls(pxls, pxls_len, key);
+        pixle *encrypted_pxls = encrypt_pxls(pxls, pxls_len, key);
 
         // Free what i allocate with my self
         free(pxls);
         // pxls = decrypted_pxls;
+        pxls = encrypted_pxls;
     }
 
     // Make output

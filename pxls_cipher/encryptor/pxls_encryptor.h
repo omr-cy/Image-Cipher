@@ -3,7 +3,7 @@
 
 #include "../helpers/helpers.h"
 
-pixle encrypt_pxl(pixle pxl, affkey key);
-pixle* encrypt_pxls(pixle pxls[], int pxls_len, affkey key);
+pixle encrypt_pxl(pixle pxl, int key);
+pixle* encrypt_pxls(pixle pxls[], int pxls_len, int key);
 
 #endif

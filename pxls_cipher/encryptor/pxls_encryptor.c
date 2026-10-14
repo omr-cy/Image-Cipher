@@ -9,16 +9,16 @@
 // C = is the result
 // ---------------------------
 
-pixle encrypt_pxl(pixle pxl, affkey key)
+pixle encrypt_pxl(pixle pxl, int key)
 {
     pixle encrypted_pxl; // Encrypted Pixle
-    encrypted_pxl.red = ((key.a * pxl.red) + key.b) % 256;
-    encrypted_pxl.green = ((key.a * pxl.green) + key.b) % 256;
-    encrypted_pxl.blue = ((key.a * pxl.blue) + key.b) % 256;
+    encrypted_pxl.red = key ^ pxl.red;
+    encrypted_pxl.green = key ^ pxl.green;
+    encrypted_pxl.blue = key ^ pxl.blue;
     return encrypted_pxl;
 }
 
-pixle* encrypt_pxls(pixle pxls[], int pxls_len, affkey key)
+pixle* encrypt_pxls(pixle pxls[], int pxls_len, int key)
 {
     pixle *encrypted_pxls = malloc(sizeof(pixle) * pxls_len);
 

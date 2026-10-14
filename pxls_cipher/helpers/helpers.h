@@ -15,14 +15,14 @@ typedef struct {
 } pixle;
 
 // Create Affine Key Structuer
-typedef struct {
-    int a;
-    int b;
-} affkey;
+// typedef struct {
+//     int a;
+//     int b;
+// } affkey;
 
 // Define the Functions Prototypes
 pixle str_to_pxl(char *rgb);
-affkey generate_key(char *password);
+int generate_key(char *password);
 int get_pxls_len(char *pxls_txt);
 pixle* parse_pxls(char *text, int pxls_len);
 char* concatenate_pxls(pixle pxls[], int pxls_len);
