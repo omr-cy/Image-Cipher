@@ -20,9 +20,10 @@ A Program Can Encrypt and also Decrypt a **Part** or a **Section** of Image with
 
 ## C Part Steps (pxls_cipher)
 
-> Usage: `pxls_cipher action pixles password
+> Usage: `./pxls_cipher action pixles password`
 
-> Hint : `pxls_cipher encrypt 56,95,69/56,245,69/123,255,233 pass123!!
+
+> Hint : `./pxls_cipher encrypt 56,95,69/56,245,69/123,255,233 pass123!!`
 
 ---
 
