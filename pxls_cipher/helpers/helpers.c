@@ -82,14 +82,19 @@ pixle* parse_pxls(char *pxls_txt, int pxls_len)
 
 char* concatenate_pxls(pixle pxls[], int pxls_len)
 {
-    char *output = malloc(sizeof(pixle) * pxls_len);
+    // Calculate the real size of the output.
+    int pxls_size = sizeof(pixle) * pxls_len; // The size of "str pixle, like '52,26,88/'" is 12 bytes.
+
+    // Allocate enophe memory for the output
+    char *output = malloc(pxls_size);
+
     // Cleaning the garbage values
-    for (int i = 0; i < sizeof(pixle) * pxls_len; i++)
+    for (int i = 0; i < pxls_size; i++)
     {
         output[i] = '\0';
     }
 
-    char pxl[20];
+    char pxl[12];
     for (int i = 0; i < pxls_len; i++)
     {
         if (i + 1 != pxls_len)

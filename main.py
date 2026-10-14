@@ -11,7 +11,7 @@ pxls_cipher.restype  = c_char_p
 
 # run the function
 action = b"e"
-pixles = (b"56,95,69/"*300).strip(b'/')
+pixles = (b"56,95,69/"*3000).strip(b'/')
 passwd = b"pass123"
 
 result_bytes = pxls_cipher(action, pixles, passwd)
