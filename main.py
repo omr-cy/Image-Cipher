@@ -16,7 +16,6 @@ passwd = b"pass123"
 
 result_bytes = pxls_cipher(action, pixles, passwd)
 
-
 # print the results
 if result_bytes:
     print(result_bytes.decode())
