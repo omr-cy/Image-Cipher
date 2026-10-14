@@ -1,27 +1,17 @@
 #include "encryptor/pxls_encryptor.h"
-#include "helpers.h"
-// #include "decryptor/pxls_decryptor.h"
+#include "decryptor/pxls_decryptor.h"
 
-// The Main App
-int main(int argc, char *argv[])
+// The Main App for Python
+char* pxls_cipher(const char *action, char *pixles, char *password)
 {
-    if (argc != 4)
-    {
-        printf("Usage: pxls_cipher action pixles password\n");
-        printf("Hint : pxls_cipher encrypt 56,95,69/56,245,69/123,255,233 pass123!!\n");
-        return 1;
-    }
-    // Make const of action because it must be unchanged
-    const char *action = argv[1];
-
     // Getting the number of the pixles
-    int pxls_num = get_pxls_number(argv[2]);
+    int pxls_num = get_pxls_number(pixles);
 
     // Parsing text to get pixles
-    pixle *pxls = parse_pxls(argv[2], pxls_num);
+    pixle *pxls = parse_pxls(pixles, pxls_num);
 
     // Generating the Key
-    affkey key = generate_key(argv[2]);
+    affkey key = generate_key(password);
 
     // If the action is Encrypt:
     if (strcmp(action, "encrypt") == 0 || strcmp(action, "e") == 0)
@@ -33,6 +23,7 @@ int main(int argc, char *argv[])
         free(pxls);
         pxls = encrypted_pxls;
     }
+    // If the action is Decrypt:
     else if (strcmp(action, "decrypt") == 0 || strcmp(action, "d") == 0)
     {
         // Encrypt the pixles with the affin cipher
@@ -47,13 +38,33 @@ int main(int argc, char *argv[])
     char *output = concatenate_pxls(pxls, pxls_num);
 
     // Print the output
-    if (output != NULL)
+    if (output == NULL)
     {
-        printf("%s\n", output);
+        // Free what i allocate with my self
+        free(pxls);
     }
 
     // Free what i allocate with my self
-    free(output);
     free(pxls);
+    return output;
+}
+
+// The Main App for CLI
+int main(int argc, char *argv[])
+{
+    if (argc != 4)
+    {
+        printf("Usage: pxls_cipher action pixles password\n");
+        printf("Hint : pxls_cipher encrypt 56,95,69/56,245,69/123,255,233 pass123!!\n");
+        return 1;
+    }
+
+    char *output = pxls_cipher(argv[1], argv[2], argv[3]);
+
+    // Print the output
+    printf("%s\n", output);
+
+    // Free what i allocate with my self
+    free(output);
     return 0;
 }

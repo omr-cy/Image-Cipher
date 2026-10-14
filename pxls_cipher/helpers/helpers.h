@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "sha256_c/sha256.h"
+#include "../sha256_c/sha256.h"
 
 // Create a Pexle Structuer:
 typedef struct {
@@ -16,8 +16,8 @@ typedef struct {
 
 // Create Affine Key Structuer
 typedef struct {
-    long a;
-    long b;
+    int a;
+    int b;
 } affkey;
 
 // Define the Functions Prototypes

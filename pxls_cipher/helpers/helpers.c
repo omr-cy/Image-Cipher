@@ -1,4 +1,5 @@
 #include "helpers.h"
+#include <stdlib.h>
 
 // Convert the Input string to Pixle
 pixle str_to_pixle(char *rgb)
@@ -81,14 +82,15 @@ pixle* parse_pxls(char *text, int pxls_num)
 
 char* concatenate_pxls(pixle pxls[], int pxls_num)
 {
-    char *output = malloc(sizeof(char) * 100);
+    char *output = malloc(sizeof(char));
+    output[0] = '\0'; // Cleaning the garbage values
+
     char pxl[20];
     for (int i = 0; i < pxls_num; i++)
     {
         if (i + 1 == pxls_num)
         {
             sprintf(pxl, "%i,%i,%i", pxls[i].red, pxls[i].green, pxls[i].blue);
-            // printf("%s\n", pxl);
         }
         else
         {
