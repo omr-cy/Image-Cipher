@@ -1,4 +1,5 @@
 #include "helpers.h"
+#include <stdint.h>
 #include <stdlib.h>
 
 // Convert the Input string to Pixle
@@ -19,7 +20,8 @@ int generate_key(char *password)
     // Allocate Memory and Compute SHA-256 sum. from "sha256.c"
     char hex[SHA256_HEX_SIZE];
     sha256_hex(password, strlen(password), hex);
-    // Compute SHA256
+
+    // Making an key from the password and the sha256 of the password
     int key = 0;
     for (int i = 0, len = strlen(password); i < len; i++)
     {
@@ -32,6 +34,18 @@ int generate_key(char *password)
     // Check the 256
     key = key % 256;
     return key;
+}
+
+pixle* xor_cipher(pixle *pxls, int pxls_len, int key)
+{
+    pixle *cipherd_pxls = malloc(sizeof(pixle) * pxls_len);
+    for (int i = 0; i < pxls_len; i++)
+    {
+        cipherd_pxls[i].red = key ^ pxls[i].red;
+        cipherd_pxls[i].green = key ^ pxls[i].green;
+        cipherd_pxls[i].blue = key ^ pxls[i].blue;
+    }
+    return cipherd_pxls;
 }
 
 int get_pxls_len(char *pxls_txt)

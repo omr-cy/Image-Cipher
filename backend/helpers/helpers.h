@@ -23,6 +23,7 @@ typedef struct {
 // Define the Functions Prototypes
 pixle str_to_pxl(char *rgb);
 int generate_key(char *password);
+pixle* xor_cipher(pixle *pxls, int pxls_len, int key);
 int get_pxls_len(char *pxls_txt);
 pixle* parse_pxls(char *text, int pxls_len);
 char* concatenate_pxls(pixle pxls[], int pxls_len);
