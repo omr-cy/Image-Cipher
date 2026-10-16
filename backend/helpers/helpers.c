@@ -58,7 +58,6 @@ int get_pxls_len(char *pxls_txt)
             pxls_len += 1;
         }
     }
-    // printf("Pixles len in C: %i\n", pxls_len);
     return pxls_len;
 }
 

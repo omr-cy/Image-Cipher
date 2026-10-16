@@ -10,23 +10,12 @@ A Program Can Encrypt and also Decrypt a **Part** or a **Section** of Image with
 
 >Detailed
 
-- Hybrid Code (`C`, `Python`, `JavaScript`)
+- Hybrid Code (`C`, `Python`, `Web`)
 - For Encrypt and Decrypt Pixels (Back-end) Using:  `C`,
-- For User Interface (Front-end) Using: `JavaScript` > `ReactJS`
-- For **API** Between (Front-end) and (Back-end) Using: `Python` > `Flask`,
-- For Mobile Front-end Using: `Capacitor` program.
+- For User Interface (Front-end) Using: `HTML CSS JavaScript`
+- For **API** Between (Front-end) and (Back-end) and more.., Using: `Python` > `Flask`,
 
 ---
-
-## C Part Steps (pxls_cipher)
-
-> Usage: `./pxls_cipher action pixles password`
-
-
-> Hint : `./pxls_cipher encrypt 56,95,69/56,245,69/123,255,233 pass123!!`
-
----
-
 
 ## Input & Process & Output
 
@@ -36,3 +25,4 @@ A Program Can Encrypt and also Decrypt a **Part** or a **Section** of Image with
 4. Encrypt the Metadata with xor key.
 5. Return the Ciphered Image.
 
+---
