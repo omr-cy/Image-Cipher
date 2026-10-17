@@ -8,5 +8,5 @@
 gcc -FPIC -shared\
     main.c\
     helpers/helpers.c\
-    sha256_c/sha256.c\
+    helpers/sha256_c/sha256.c\
     -o main.so

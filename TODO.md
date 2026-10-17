@@ -3,9 +3,9 @@ make a 'c structre class' in python with 'ctypes' like this...
 ```c
 // Create a Pexle Structuer:
 typedef struct {
-    int red;
-    int green;
-    int blue;
+    int r;
+    int g;
+    int b;
 } pixle;
 ```
-to make it esey for the c backend,
+to make it esey and more faster for the c backend,

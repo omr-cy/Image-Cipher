@@ -1,4 +1,5 @@
 #include "helpers.h"
+#include <alloca.h>
 #include <stdint.h>
 #include <stdlib.h>
 
@@ -8,42 +9,51 @@ pixle str_to_pxl(char *rgb)
     // atoi() // String to an Integer
     // strtok() // String Splitter
     pixle pxl;
-    pxl.red = atoi(strtok(rgb, ","));
-    pxl.green = atoi(strtok(NULL, ","));
-    pxl.blue = atoi(strtok(NULL, ","));
+    pxl.r = atoi(strtok(rgb, ","));
+    pxl.g = atoi(strtok(NULL, ","));
+    pxl.b = atoi(strtok(NULL, ","));
     return pxl;
 }
 
-// Hash Password and Convert it to Long Integer Key
-int generate_key(char *password)
+int *generate_hex_keys(char *passwd)
 {
-    // Allocate Memory and Compute SHA-256 sum. from "sha256.c"
+    // Compute the sha256 of the passwd, from "sha256.c"
     char hex[SHA256_HEX_SIZE];
-    sha256_hex(password, strlen(password), hex);
+    sha256_hex(passwd, strlen(passwd), hex);
 
-    // Making an key from the password and the sha256 of the password
-    int key = 0;
-    for (int i = 0, len = strlen(password); i < len; i++)
+    // Allocate Memory
+    int *hex_keys = malloc(sizeof(int)*65);
+
+    for (int i = 0, x = 0, hex_len = strlen(hex); i < hex_len; i++, x++)
     {
-        key += password[i];
+        if (x < hex_len)
+        {
+            hex_keys[i] = (int) hex[x] + (int) hex[x+1];
+
+            x++; // Important it must be base2 steps
+        }
     }
-    for (int i = 0, len = strlen(hex); i < len; i++)
-    {
-        key += hex[i];
-    }
-    // Check the 256
-    key = key % 256;
-    return key;
+    return hex_keys;
 }
 
-pixle* xor_cipher(pixle *pxls, int pxls_len, int key)
+pixle* pxls_xor_cipher(pixle *pxls, int pxls_len, int *hex_keys)
 {
     pixle *cipherd_pxls = malloc(sizeof(pixle) * pxls_len);
-    for (int i = 0; i < pxls_len; i++)
+    int x = 0;
+
+    for (int i = 0, kyes_len = 31; i < pxls_len; i++)
     {
-        cipherd_pxls[i].red = key ^ pxls[i].red;
-        cipherd_pxls[i].green = key ^ pxls[i].green;
-        cipherd_pxls[i].blue = key ^ pxls[i].blue;
+        cipherd_pxls[i].r = pxls[i].r ^ ((hex_keys[x] * i) % 256);
+        cipherd_pxls[i].g = pxls[i].g ^ ((hex_keys[x+1] * i) % 256);
+        cipherd_pxls[i].b = pxls[i].b ^ ((hex_keys[x+2] * i) % 256);
+        if (x <= kyes_len-1)
+        {
+            x+=3;
+        }
+        else
+        {
+            x = 0;
+        }
     }
     return cipherd_pxls;
 }
@@ -95,22 +105,27 @@ char* concatenate_pxls(pixle pxls[], int pxls_len)
     // Allocate enophe memory for the output
     char *output = malloc(pxls_size);
 
+    if (output == NULL)
+    {
+        exit(1);
+    }
+
     // Cleaning the garbage values
     for (int i = 0; i < pxls_size; i++)
     {
         output[i] = '\0';
     }
 
-    char pxl[12];
+    char pxl[20];
     for (int i = 0; i < pxls_len; i++)
     {
         if (i + 1 != pxls_len)
         {
-            sprintf(pxl, "%i,%i,%i/", pxls[i].red, pxls[i].green, pxls[i].blue);
+            sprintf(pxl, "%i,%i,%i/", pxls[i].r, pxls[i].g, pxls[i].b);
         }
         else
         {
-            sprintf(pxl, "%i,%i,%i", pxls[i].red, pxls[i].green, pxls[i].blue);
+            sprintf(pxl, "%i,%i,%i", pxls[i].r, pxls[i].g, pxls[i].b);
         }
         strcat(output, pxl);
     }
@@ -123,7 +138,7 @@ void print_pxls_for_debugging(pixle pxls[], int pxls_len)
     char pxl[25];
     for (int i = 0; i < pxls_len; i++)
     {
-        sprintf(pxl, "Pixle %i: %i,%i,%i", i, pxls[i].red, pxls[i].green, pxls[i].blue);
+        sprintf(pxl, "Pixle %i: %i,%i,%i", i, pxls[i].r, pxls[i].g, pxls[i].b);
         printf("%s\n", pxl);
     }
 }
