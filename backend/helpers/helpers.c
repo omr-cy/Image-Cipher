@@ -1,6 +1,7 @@
 #include "helpers.h"
 #include <alloca.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 // Convert the Input string to Pixle
@@ -22,16 +23,18 @@ int *generate_hex_keys(char *passwd)
     sha256_hex(passwd, strlen(passwd), hex);
 
     // Allocate Memory
-    int *hex_keys = malloc(sizeof(int)*65);
+    int *hex_keys = malloc(sizeof(int) * 32);
 
-    for (int i = 0, x = 0, hex_len = strlen(hex); i < hex_len; i++, x++)
+    // Save all hex as nodes inside array with sizeof(int) * 32
+    for (int i = 0, x = 0, hex_len = strlen(hex); i < 32; i++, x+=2) //(x+=2) Important it must be base2 steps
     {
-        if (x < hex_len)
+        if  (x < hex_len)
         {
-            hex_keys[i] = (int) hex[x] + (int) hex[x+1];
-
-            x++; // Important it must be base2 steps
+            char *hex_node[2];
+            sprintf(*hex_node, "%c%c", hex[x], hex[x + 1]);
+            hex_keys[i] = (int) strtol(*hex_node, NULL, 16);
         }
+
     }
     return hex_keys;
 }
@@ -39,20 +42,20 @@ int *generate_hex_keys(char *passwd)
 pixle* pxls_xor_cipher(pixle *pxls, int pxls_len, int *hex_keys)
 {
     pixle *cipherd_pxls = malloc(sizeof(pixle) * pxls_len);
-    int x = 0;
 
-    for (int i = 0, kyes_len = 31; i < pxls_len; i++)
+    for (int i = 0, j = 0, kyes_len = 32; i < pxls_len; i++)
     {
-        cipherd_pxls[i].r = pxls[i].r ^ ((hex_keys[x] * i) % 256);
-        cipherd_pxls[i].g = pxls[i].g ^ ((hex_keys[x+1] * i) % 256);
-        cipherd_pxls[i].b = pxls[i].b ^ ((hex_keys[x+2] * i) % 256);
-        if (x <= kyes_len-1)
+        cipherd_pxls[i].r = (pxls[i].r ^ hex_keys[j] * i) % 256;
+        cipherd_pxls[i].g = (pxls[i].g ^ hex_keys[j + 1] * i) % 256;
+        cipherd_pxls[i].b = (pxls[i].b ^ hex_keys[j + 2] * i) % 256;
+
+        if (j < kyes_len)
         {
-            x+=3;
+            j+=2;
         }
         else
         {
-            x = 0;
+            j = 0;
         }
     }
     return cipherd_pxls;

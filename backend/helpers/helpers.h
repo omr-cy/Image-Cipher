@@ -22,11 +22,12 @@ typedef struct {
 
 // Define the Functions Prototypes
 pixle str_to_pxl(char *rgb);
-// long generate_key(char *password);
-int* generate_hex_keys(char *passwd);
 int get_pxls_len(char *pxls_txt);
 pixle* parse_pxls(char *text, int pxls_len);
-pixle* pxls_xor_cipher(pixle *pxls, int pxls_len, int *hex_keys);
+
+int* generate_hex_keys(char *passwd);
+pixle* pxls_xor_cipher(pixle *origin_pxls, int pxls_len, int *hex_keys);
+
 char* concatenate_pxls(pixle pxls[], int pxls_len);
 void print_pxls_for_debugging(pixle pxls[], int pxls_len);
 

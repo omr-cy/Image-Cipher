@@ -5,6 +5,10 @@
 
 > https://lucidar.me/en/dev-c-cpp/sha-256-in-c-cpp/#top
 
+
+## Hex in c
+> https://stackoverflow.com/questions/29547115/how-to-convert-string-to-hex-value-in-c
+
 ----
 
 ## Images in Python
@@ -12,3 +16,11 @@
 > https://stackoverflow.com/questions/6483489/change-specific-rgb-color-pixels-to-another-color-in-image-file
 
 > https://stackoverflow.com/questions/3715493/encoding-an-image-file-with-base64#3715530
+
+----
+
+
+## C with python
+
+> https://stackoverflow.com/questions/65901925/how-to-create-a-c-struct-from-python-using-ctypes
+> https://coderslegacy.com/python/ctypes-arrays/
