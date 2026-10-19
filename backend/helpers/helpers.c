@@ -43,20 +43,11 @@ pixle* pxls_xor_cipher(pixle *pxls, int pxls_len, int *hex_keys)
 {
     pixle *cipherd_pxls = malloc(sizeof(pixle) * pxls_len);
 
-    for (int i = 0, j = 0, kyes_len = 32; i < pxls_len; i++)
+    for (int i = 0, j = 0; i < pxls_len; i++, j = (j + 2) % 32)
     {
         cipherd_pxls[i].r = (pxls[i].r ^ hex_keys[j] * i) % 256;
         cipherd_pxls[i].g = (pxls[i].g ^ hex_keys[j + 1] * i) % 256;
         cipherd_pxls[i].b = (pxls[i].b ^ hex_keys[j + 2] * i) % 256;
-
-        if (j < kyes_len)
-        {
-            j+=2;
-        }
-        else
-        {
-            j = 0;
-        }
     }
     return cipherd_pxls;
 }

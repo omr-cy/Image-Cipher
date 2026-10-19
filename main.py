@@ -7,8 +7,8 @@ from io import BytesIO
 from utils import extract_pxls, pxls_cipher
 
 
-# with open("/home/omr/Projects/Image-Cipher/utils/tests/image.base64", "rb") as bytes:
-with open("/home/omr/Projects/Image-Cipher/utils/tests/cipherd_img.base64", "rb") as bytes:
+with open("/home/omr/Projects/Image-Cipher/utils/tests/image.base64", "rb") as bytes:
+# with open("/home/omr/Projects/Image-Cipher/utils/tests/cipherd_img.base64", "rb") as bytes:
     # Decode the base64 image
     img_data = base64.b64decode(bytes.read())
     # Convert the Image to a 2D Array
@@ -21,7 +21,7 @@ pxls_len = len(coordinates_json)
 
 origin_pxls = extract_pxls(img_array, pxls_len, coordinates_json)
 
-cipherd_pxls = pxls_cipher(origin_pxls, pxls_len, b"omar123!")
+cipherd_pxls = pxls_cipher(origin_pxls, pxls_len, b"omar123")
 
 # Replace pxls aka Swap them
 for i in range(pxls_len):

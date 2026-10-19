@@ -15,3 +15,9 @@ I think it's more faster to skipping the ('str to pxsl', 'pxsl to str', 'concate
 - currint commit '006190e'
 
 > https://stackoverflow.com/questions/65901925/how-to-create-a-c-struct-from-python-using-ctypes
+
+
+## اريد بناء دالة:
+تاخذ مصفوفة مرتبة ومفتاح (رقم)
+وبناء على الرقم تقوم الدالة بخلط العناصر وارجاعها في مصفوفة جديدة مخلوطة
+واذا اعطيت الدالة المصفوفة المخلوطة بنفس المفتاح ترجع المصوفة لترتيبها الاصلي
