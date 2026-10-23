@@ -9,6 +9,10 @@
 ## Hex in c
 > https://stackoverflow.com/questions/29547115/how-to-convert-string-to-hex-value-in-c
 
+
+## Randomize in c
+> https://www.geeksforgeeks.org/dsa/pseudo-random-number-generator-prng/
+
 ----
 
 ## Images in Python
@@ -24,3 +28,6 @@
 
 > https://stackoverflow.com/questions/65901925/how-to-create-a-c-struct-from-python-using-ctypes
 > https://coderslegacy.com/python/ctypes-arrays/
+
+
+---

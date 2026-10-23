@@ -1,18 +1,18 @@
 #include "helpers/helpers.h"
 
 // The pxls_cipher
-pixle* pxls_cipher(pixle *origin_pxls, int pxls_len, char *passwd)
+void pxls_cipher(pixle *pxls, int pxls_len, char *passwd)
 {
     // Generating the Key
     int *hex_keys = generate_hex_keys(passwd);
 
     // Encrypt/Decrypt the pixles with the xor cipher
-    pixle *cipherd_pxls = pxls_xor_cipher(origin_pxls, pxls_len, hex_keys);
+    pxls_xor_cipher(pxls, pxls_len, hex_keys);
 
-    // Free what i allocate with my self
-    // free(origin_pxls); // Do not free this !! it's Allocated py python
+    // Free what i allocated with my self
+    // free(pxls); // NOTE: Do not free this !! it's Allocated py python
     free(hex_keys);
-    return cipherd_pxls;
+    return;
 }
 
 // The Main App for CLI
@@ -30,20 +30,19 @@ int main(int argc, char *argv[])
     int pxls_len = get_pxls_len(argv[1]);
 
     // Parsing text to get pixles
-    pixle *origin_pxls = parse_pxls(argv[1], pxls_len);
+    pixle *pxls = parse_pxls(argv[1], pxls_len);
 
     // Encrypt/Decrypt pxls
-    pixle *cipherd_pxls = pxls_cipher(origin_pxls, pxls_len, argv[2]);
+    pxls_cipher(pxls, pxls_len, argv[2]);
 
     // Make output
-    char *output = concatenate_pxls(cipherd_pxls, pxls_len);
+    char *output = concatenate_pxls(pxls, pxls_len);
 
     // Print the output
     printf("%s\n", output);
 
-    // Free what i allocate with my self
-    free(origin_pxls);
-    free(cipherd_pxls);
+    // Free what i allocated with my self
+    free(pxls);
     free(output);
     return 0;
 }

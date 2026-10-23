@@ -1,8 +1,14 @@
+# All What i need here !
+
 import ctypes as ct
 import numpy as np
+import base64
+from io import BytesIO
+import json
+from PIL import Image
 
 
-# Making a Pixle c type
+# Making a C Pixle  type
 class Pixle(ct.Structure):
     _fields_ = [
         ("r", ct.c_int),
@@ -21,12 +27,12 @@ pxls_cipher = backend.pxls_cipher
 
 # Define the types of the (arguments and results) in pxls_cipher()
 pxls_cipher.argtypes = [c_pixle_p, ct.c_int, ct.c_char_p] # Takes a Pointer of Pixles, & a String. aka (origin_pxls, passwd)
-pxls_cipher.restype  = c_pixle_p # Returns a Pointer of Pixles. aka cipherd_pxls
+pxls_cipher.restype  = ct.c_void_p # Returns a Pointer of Pixles. aka cipherd_pxls
 
 
-"""The Py Helpers Functions"""
+"""The Python Helpers Functions"""
 def extract_pxls(img_array, pxls_len, coordinates_json):
-    # Extraxt Pixles in Coordinates
+    # Extraxt Pixles in Coordinates aka crds
     pxls = (Pixle * pxls_len)()
 
     for i in range(pxls_len):
