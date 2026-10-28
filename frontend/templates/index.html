@@ -3,10 +3,16 @@
 {% block main %}
 
     <!-- Main block in index.html -->
-    <main class="flex-1 flex items-center justify-center relative min-h-[350px]">
-        <p>My name is Omar and THIS IS Image Cipher</p>
-        <button>boo</button>
-        <button>baz</button>
-    </main>
+    <div class="flex items-center justify-center relative min-h-[250px]">
+        <p>My name is Omar and this is Image Cipher</p>
+    </div>
+    <div class="flex items-center justify-center relative min-h-[10px] space-x-20">
+        <button class="index-btn cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium py-2.5 px-4 rounded-xl transition-all shadow-md flex items-center gap-2">
+            <a href="/encryptor">Encrypt</a>
+        </button>
+        <button class="index-btn cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium py-2.5 px-4 rounded-xl transition-all shadow-md flex items-center gap-2">
+            <a href="/decryptor">Decrypt</a>
+        </button>
+    </div>
 
 {% endblock %}
