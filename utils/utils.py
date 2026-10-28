@@ -43,8 +43,28 @@ def extract_pxls(img_array, pxls_len, coordinates_json):
     return pxls
 
 
-# def replace_pxls(img_array, cipherd_pxls, pxls_len, coordinates_json):
-#     for i in range(pxls_len):
-#         c = coordinates_json[i]
-#         img_array[c["x"]][c["y"]][0:3] = np.array((cipherd_pxls[i].r, cipherd_pxls[i].g, cipherd_pxls[i].b))
-#     return img_array
+"""The Python Cypher Function"""
+def encryptor(img_base64, coordinates, passwd):
+    
+    # Decode the base64 image
+    img_data = base64.b64decode(bytes.read())
+    
+    # Convert the Image to a 2D Array
+    img_array = np.array(Image.open(BytesIO(img_data))) # rgb inside pxl data[x][y][0:3]
+
+    # Storing the Length of the pxls for futers perbos
+    pxls_len = len(coordinates_json)
+    
+    # Extracting the pxls from the Image aka Array
+    pxls = extract_pxls(img_array, pxls_len, coordinates_json)
+    
+    # Encrypting The Pixles with pxls_cipher
+    pxls_cipher(pxls, pxls_len, passwd.decode())
+    
+    # Replace pxls aka Swap them
+    for i in range(pxls_len):
+        c = coordinates_json[i]
+        img_array[c["x"]][c["y"]][0:3] = np.array((pxls[i].r, pxls[i].g, pxls[i].b))
+        
+    # Return the Ecrypted Image as base64
+    return base64.encode(Image.fromarray(img_array))

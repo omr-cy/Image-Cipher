@@ -29,5 +29,6 @@
 > https://stackoverflow.com/questions/65901925/how-to-create-a-c-struct-from-python-using-ctypes
 > https://coderslegacy.com/python/ctypes-arrays/
 
-
+## Flask in python
+> https://stackoverflow.com/questions/31002890/how-to-reference-a-html-template-from-a-different-directory-in-python-flask
 ---

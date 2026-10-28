@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Cipher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        .canvas-container { position: relative; overflow: hidden; background: #111827; border-radius: 0.75rem; }
+        canvas { display: block; touch-action: none; }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #1f2937; }
+        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header -->
+    <header class="bg-gray-800 border-b border-gray-700 px-6 py-4 shadow-lg flex flex-wrap justify-between items-center gap-4">
+        <div class="flex items-center space-x-3 space-x-reverse">
+            <div>
+                <h1 class="text-xl font-bold text-white tracking-wide">Image Cipher</h1>
+                <p class="text-xs text-gray-400">Encrypt Your Favorite Parts!</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <div class="flex-1 flex flex-col lg:flex-row p-4 gap-4 overflow-hidden">
+        
+        <!-- Sidebar Controls -->
+        <aside class="w-full lg:w-80 bg-gray-800 border border-gray-700 rounded-2xl p-5 flex flex-col gap-6 shadow-xl">
+            <!-- Layers / Shapes List -->
+            <div class="flex-1 flex flex-col min-h-[160px]">
+                <div class="flex justify-between items-center mb-2">
+                    <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">The Selected Parts</label>
+                    <button onclick="clearAllShapes()" class="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 transition">
+                        <i class="fa-solid fa-trash-can"></i> Clear all
+                    </button>
+                </div>
+                <div id="shapesList" class="flex-1 bg-gray-900 border border-gray-700 rounded-xl p-2 overflow-y-auto max-h-48 space-y-1.5">
+                    <p class="text-xs text-gray-500 text-center py-4">Nothing yet!</p>
+                </div>
+            </div>
+
+            <!-- Action Button: Confirm & Extract Pixels -->
+            <button id="extractBtn" onclick="confirmAndExtractPixels()" disabled class="w-full bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Encrypt</span>
+            </button>
+        </aside>
+
+        <!-- Main Canvas Area -->
+        <main class="flex-1 bg-gray-800 border border-gray-700 rounded-2xl p-4 flex flex-col gap-4 shadow-xl overflow-hidden">
+            <!-- Canvas Container -->
+            <div id="canvasParent" class="flex-1 canvas-container flex items-center justify-center relative min-h-[350px]">
+                <div id="noImagePlaceholder" class="text-center p-8">
+                    <i class="fa-solid fa-image text-5xl text-gray-600 mb-3"></i>
+                    <!-- Image Upload -->
+                    <div class="flex items-center space-x-3 space-x-reverse">
+                        <label class="cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium py-2.5 px-4 rounded-xl transition-all shadow-md flex items-center gap-2">
+                            <i class="fa-solid fa-upload"></i>
+                            <span>Upload your image</span>
+                            <input type="file" id="imageInput" accept="image/*" class="hidden">
+                        </label>
+                    </div>
+                </div>
+                <!-- Display Image if there-->
+                <canvas id="mainCanvas" class="hidden"></canvas>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-gray-800 border border-gray-700 text-white px-4 py-3 rounded-xl shadow-2xl transition-all transform translate-y-20 opacity-0 flex items-center gap-3 z-50">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toastMsg" class="text-sm font-medium"></span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
