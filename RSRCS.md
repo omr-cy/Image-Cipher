@@ -32,3 +32,6 @@
 ## Flask in python
 > https://stackoverflow.com/questions/31002890/how-to-reference-a-html-template-from-a-different-directory-in-python-flask
 ---
+
+## pip with python
+> https://stackoverflow.com/questions/32772596/pip-install-pil-fails

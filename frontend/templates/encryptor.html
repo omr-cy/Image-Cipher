@@ -1,33 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Cipher</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <style>
-        .canvas-container { position: relative; overflow: hidden; background: #111827; border-radius: 0.75rem; }
-        canvas { display: block; touch-action: none; }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #1f2937; }
-        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
-    </style>
-</head>
-<body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col font-sans antialiased selection:bg-indigo-500 selection:text-white">
+{% extends "layout.html" %}
 
-    <!-- Header -->
-    <header class="bg-gray-800 border-b border-gray-700 px-6 py-4 shadow-lg flex flex-wrap justify-between items-center gap-4">
-        <div class="flex items-center space-x-3 space-x-reverse">
-            <div>
-                <h1 class="text-xl font-bold text-white tracking-wide">Image Cipher</h1>
-                <p class="text-xs text-gray-400">Encrypt Your Favorite Parts!</p>
-            </div>
-        </div>
-    </header>
+{% block main %}
 
-    <!-- Main Workspace -->
+    <!-- Main block in index -->
     <div class="flex-1 flex flex-col lg:flex-row p-4 gap-4 overflow-hidden">
         
         <!-- Sidebar Controls -->
@@ -79,6 +54,4 @@
         <span id="toastMsg" class="text-sm font-medium"></span>
     </div>
 
-    <script src="main.js"></script>
-</body>
-</html>
+{% endblock %}

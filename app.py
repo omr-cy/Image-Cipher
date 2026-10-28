@@ -4,17 +4,23 @@ from utils import *
 from flask import Flask, render_template as rt
 
 
-app = Flask(__name__, template_folder='./frontend')
+app = Flask(__name__, template_folder="./frontend/templates", static_folder="./frontend/static")
+
 
 @app.route("/")
 def index():
-	...
-	
+	return rt("index.html")
+
+
 @app.route("/encryptor")
 def encryptor():
 	return rt("encryptor.html")
-	# encryptor()
-	...
+
+
+@app.route("/decryptor")
+def decryptor():
+	return rt("decryptor.html")
+
 
 
 # def main():
