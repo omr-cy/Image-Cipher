@@ -11,11 +11,17 @@
     <body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col font-sans antialiased selection:bg-indigo-500 selection:text-white">
         <!-- Header -->
         <header class="bg-gray-800 border-b border-gray-700 px-6 py-4 shadow-lg flex flex-wrap justify-between items-center gap-4">
+            <!-- Title -->
             <div class="flex items-center space-x-3 space-x-reverse">
                 <div>
                     <h1 class="text-xl font-bold text-white tracking-wide">Image Cipher</h1>
                     <p class="text-xs text-gray-400">Encrypt Your Favorite Pixles!</p>
                 </div>
+            </div>
+            <!-- Notification Toast -->
+            <div id="toast" class="fixed right-6 bg-gray-800 border border-gray-700 text-white px-4 py-3 rounded-xl shadow-2xl transition-all transform translate-y-20 opacity-0 flex items-center gap-3 z-50">
+                <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400"></i>
+                <span id="toastMsg" class="text-sm font-medium"></span>
             </div>
         </header>
         <!-- Start of Main Block -->
@@ -23,12 +29,6 @@
         {% block main %} {% endblock %}
 
         <!-- End of Main Block -->
-
-        <!-- Notification Toast -->
-        <div id="toast" class="fixed bottom-6 right-6 bg-gray-800 border border-gray-700 text-white px-4 py-3 rounded-xl shadow-2xl transition-all transform translate-y-20 opacity-0 flex items-center gap-3 z-50">
-            <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400"></i>
-            <span id="toastMsg" class="text-sm font-medium"></span>
-        </div>
         <script src="/static/main.js"></script>
     </body>
 </html>

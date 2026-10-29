@@ -35,3 +35,7 @@
 
 ## pip with python
 > https://stackoverflow.com/questions/32772596/pip-install-pil-fails
+
+
+## json in python
+> https://stackoverflow.com/questions/11197818/how-do-i-make-a-json-object-with-multiple-arrays
