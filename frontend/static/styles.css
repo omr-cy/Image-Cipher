@@ -1,17 +1,394 @@
-img
-{
-    display: block;
-    width: 500px;
-    height: 600px;
-    max-width: 100%;
+#uploader {
+    display: flex;
+    min-height: 75vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
-.container
-{
+
+#uploader[hidden],
+#decrypt-uploader[hidden] {
+    display: none;
+}
+
+#drop-area {
+    width: min(100%, 500px);
+    padding: 24px;
+    border: 2px dashed #64748b;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#img-view img {
+    width: 72px;
+}
+
+#img-view span {
+    display: block;
+    color: #aab6c8;
+}
+
+
+/* NOTE: the following code is not from me it's from the AI assistant, I just modified it a bit to fit my needs. */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background-color: #101827;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background-color: #101827;
+    color: #eef2f8;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    padding: 16px;
+    background: #080d16;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.site-brand h1 {
+    margin: 0;
+}
+
+.site-brand p {
+    margin: 0;
+    color: #aab6c8;
+}
+
+.site-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.site-links a {
+    color: #eef2f8;
+    text-decoration: none;
+}
+
+.site-links a:hover {
+    text-decoration: underline;
+}
+
+.home {
+    margin: 12vh auto 0;
+    padding: 16px;
+    text-align: center;
+}
+
+.home p {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.page-actions {
     display: flex;
     justify-content: center;
-    justify-items: center;
+    gap: 12px;
+    margin: 16px auto;
 }
-#cipherd-img
-{
 
+.page-actions button {
+    padding: 0;
+    border: 0;
+    background: #334155;
+    cursor: pointer;
 }
+
+.page-actions button:hover {
+    background: #475569;
+}
+
+.page-actions a {
+    display: block;
+    padding: 8px 14px;
+    color: #fff;
+    text-decoration: none;
+}
+
+#cropper-viewer {
+    display: flex;
+    width: min(100% - 32px, 900px);
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin: 24px auto;
+    padding: 16px;
+}
+
+#cropper-stage {
+    display: flex;
+    width: 100%;
+    height: 60vh;
+    min-height: 280px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #182235;
+}
+
+#origin-img {
+    display: block;
+    max-width: 100%;
+}
+
+.editor-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#password,
+#encrypt-btn {
+    min-height: 42px;
+    padding: 8px 12px;
+    border: 1px solid #64748b;
+    border-radius: 6px;
+    font: inherit;
+}
+
+#password {
+    background: #fff;
+    color: #111827;
+}
+
+#encrypt-btn {
+    border: 0;
+    background: #4f83e3;
+    color: #fff;
+    cursor: pointer;
+}
+
+#encrypt-btn:disabled,
+#decrypt-btn:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+#encrypt-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: #aab6c8;
+}
+
+#encrypt-progress[hidden],
+#encrypt-notification[hidden] {
+    display: none;
+}
+
+.loading-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #64748b;
+    border-top-color: #4f83e3;
+    border-radius: 50%;
+    animation: spinner-rotate 0.8s linear infinite;
+}
+
+@keyframes spinner-rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .loading-spinner {
+        animation: none;
+    }
+}
+
+#encrypt-notification {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    max-width: min(360px, calc(100vw - 40px));
+    padding: 12px 16px;
+    border: 1px solid #794b50;
+    border-radius: 8px;
+    background: #291c22;
+    color: #f3c7c7;
+    box-shadow: 0 6px 20px rgb(0 0 0 / 25%);
+}
+
+#encrypt-notification.success {
+    border-color: #426d53;
+    background: #19291f;
+    color: #c4e6ce;
+}
+
+#decrypt-uploader {
+    display: flex;
+    min-height: 65vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#decrypt-drop-area {
+    width: min(100%, 500px);
+    padding: 24px;
+    border: 2px dashed #64748b;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#decrypt-img-view img {
+    width: 72px;
+}
+
+#decrypt-img-view span {
+    display: block;
+    color: #aab6c8;
+}
+
+#decrypt-viewer {
+    display: flex;
+    width: min(100% - 32px, 900px);
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin: 24px auto;
+    padding: 16px;
+}
+
+#decrypt-viewer[hidden] {
+    display: none;
+}
+
+#decrypt-stage {
+    display: flex;
+    width: 100%;
+    height: 60vh;
+    min-height: 280px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #182235;
+}
+
+#decrypt-img {
+    display: block;
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+}
+
+#decrypt-password,
+#decrypt-btn {
+    min-height: 42px;
+    padding: 8px 12px;
+    border: 1px solid #64748b;
+    border-radius: 6px;
+    font: inherit;
+}
+
+#decrypt-password {
+    background: #fff;
+    color: #111827;
+}
+
+#decrypt-btn {
+    border: 0;
+    background: #4f83e3;
+    color: #fff;
+    cursor: pointer;
+}
+
+#decrypt-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: #aab6c8;
+}
+
+#decrypt-progress[hidden],
+#decrypt-notification[hidden] {
+    display: none;
+}
+
+#decrypt-notification {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    max-width: min(360px, calc(100vw - 40px));
+    padding: 12px 16px;
+    border: 1px solid #794b50;
+    border-radius: 8px;
+    background: #291c22;
+    color: #f3c7c7;
+    box-shadow: 0 6px 20px rgb(0 0 0 / 25%);
+}
+
+#decrypt-notification.success {
+    border-color: #426d53;
+    background: #19291f;
+    color: #c4e6ce;
+}
+
+#decrypt-viewer.is-decrypted #decrypt-stage {
+    height: auto;
+    min-height: 0;
+    padding: 8px;
+}
+
+#decrypt-viewer.is-decrypted #decrypt-img {
+    max-height: 70vh;
+    object-fit: contain;
+}
+
+#cropper-viewer.is-encrypted #cropper-stage {
+    height: auto;
+    min-height: 0;
+    padding: 8px;
+}
+
+#cropper-viewer.is-encrypted #origin-img {
+    max-height: 70vh;
+    object-fit: contain;
+}
+
+@media (max-width: 600px) {
+    .site-nav {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .page-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .editor-controls {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    #password,
+    #encrypt-btn {
+        width: 100%;
+    }
+}
+
+/* ------------ end of the code from the AI assistant ------------ */

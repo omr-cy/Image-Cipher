@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
-from utils import *
-from flask import Flask, render_template as rt, request, jsonify
+from flask import Flask, jsonify, render_template as rt, request
 
+from helpers import *
 
 app = Flask(__name__, template_folder="./frontend/templates", static_folder="./frontend/static")
 
@@ -12,47 +12,58 @@ def index():
 	return rt("index.html")
 
 
-@app.route("/encryptor", methods=["GET", "POST"])
-def encryptor():
+@app.route("/encrypt", methods=["GET", "POST"])
+def encrypt():
 	if request.method == "POST":
-		...
-	else:
-		return rt("encryptor.html")
+
+		# Validate Image
+		img_base64 = request.json.get("image")
+		if not img_base64:
+			return "<p>Error with image</p>", 400
+
+		# Validate Coords
+		coords = request.json.get("coords")
+		if not coords:
+			return "<p>Error with coords</p>", 400
+		
+		# Validate Password
+		passwd = request.json.get("passwd")
+		if not passwd or len(passwd) < 8:
+			return "<p>Error with password</p>", 400
+
+		encrypted_image = cypher(img_base64, coords, passwd)
+		return jsonify(
+			image=encrypted_image.decode("ascii"),
+			imageType="image/png",
+		)
+
+	return rt("encrypt.html")
 
 
-@app.route("/decryptor", methods=["GET", "POST"])
-def decryptor():
+@app.route("/decrypt", methods=["GET", "POST"])
+def decrypt():
+	# NOTE: AI has written this code and i reveiwit after that
 	if request.method == "POST":
-		...
-	else:
-		return rt("decryptor.html")
+		payload = request.get_json(silent=True)
+		if not isinstance(payload, dict):
+			return jsonify(error="Invalid JSON request."), 400
+
+		img_base64 = payload.get("image")
+		passwd = payload.get("passwd")
+		if not isinstance(img_base64, str) or not img_base64:
+			return jsonify(error="Image is required."), 400
+		if not isinstance(passwd, str) or len(passwd) < 8:
+			return jsonify(error="Password must be at least 8 characters."), 400
+
+		try:
+			decrypted_image = decipher(img_base64, passwd)
+		except (OSError, TypeError, ValueError) as error:
+			return jsonify(error=str(error)), 400
+
+		return jsonify(
+			image=decrypted_image.decode("ascii"),
+			imageType="image/png",
+		)
 
 
-@app.route("/api", methods=["POST"])
-def api():
-	if not request.form.get("jsobject"):
-		return rt("error.html")
-
-	jsobject = request.form.get("jsobject")
-	pxls = to_pxls(jsobject[0])
-
-	pxls_cipher(
-		pxls, # Origin Pixles
-		jsobject[1], # Lingth
-		jsobject[2], # Passwd
-	)
-	# This means converte pxls to a RGB dict and return it as json with jsonify
-	return jsonify(to_dict(pxls))
-
-
-
-# def main():
-#     with open("/home/omr/Projects/Image-Cipher/utils/tests/image.base64", "rb") as bytes:
-#         # Decode the base64 image
-#         img_data = base64.b64decode(bytes.read())
-#         # Convert the Image to a 2D Array
-#         img_array = np.array(Image.open(BytesIO(img_data))) # row data[1], pxl in row data[1][2], rgb inside pxl data[1][2][0:3]
-# 
-#     with open("./utils/tests/pxls_coordinates.json", "r") as file:
-#         coordinates_json = json.loads(file.read())
-
+	return rt("decrypt.html")

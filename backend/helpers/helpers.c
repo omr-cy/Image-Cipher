@@ -120,9 +120,8 @@ int *generate_hex_keys(char *passwd)
     {
         if  (x < hex_len)
         {
-            char *hex_node[2];
-            sprintf(*hex_node, "%c%c", hex[x], hex[x + 1]);
-            hex_keys[i] = (int) strtol(*hex_node, NULL, 16);
+            char hex_node[3] = {hex[x], hex[x + 1], '\0'};
+            hex_keys[i] = (int) strtol(hex_node, NULL, 16);
         }
 
     }
@@ -134,9 +133,9 @@ void pxls_xor_cipher(pixle *pxls, int pxls_len, int *hex_keys)
 {
     for (int i = 0, j = 0; i < pxls_len; i++, j = (j + 2) % 32)
     {
-        pxls[i].r = (pxls[i].r ^ hex_keys[j] * i) % 256;
-        pxls[i].g = (pxls[i].g ^ hex_keys[j + 1] * i) % 256;
-        pxls[i].b = (pxls[i].b ^ hex_keys[j + 2] * i) % 256;
+        pxls[i].r = ((unsigned int)pxls[i].r ^ (unsigned int)hex_keys[j] * (unsigned int)i) % 256U;
+        pxls[i].g = ((unsigned int)pxls[i].g ^ (unsigned int)hex_keys[j + 1] * (unsigned int)i) % 256U;
+        pxls[i].b = ((unsigned int)pxls[i].b ^ (unsigned int)hex_keys[(j + 2) % 32] * (unsigned int)i) % 256U;
     }
     return;
 }

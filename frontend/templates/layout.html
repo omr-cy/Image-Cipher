@@ -3,23 +3,33 @@
     <head>
         <meta charset="UTF-8" lang="en">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Image Cipher</title>
+        <title>Image Cipher | {% block title %} {% endblock %}</title>
+
         <link rel="stylesheet" href="/static/cropper.min.css">
-        <link rel="stylesheet" href="/static/styles.css">
+        <link rel="stylesheet" href="/static/styles.css?v=6">
     </head>
     <body>
         <!-- Header -->
         <header>
-            <!-- Title -->
-            <h1>Image Cipher</h1>
-            <p>Encrypt Your Favorite Pixles!</p>
+            <nav class="site-nav">
+                <div class="site-brand">
+                    <h1>Image Cipher</h1>
+                    <p>Encrypt Your Favorite Pixles!</p>
+                </div>
+                <div class="site-links">
+                    <!-- Add optional page links here:
+                    <a href="/page">Page name</a>
+                    -->
+                </div>
+            </nav>
         </header>
+
         <!-- Start of Main Block -->
 
         {% block main %} {% endblock %}
 
         <!-- End of Main Block -->
         <script src="/static/cropper.min.js"></script>
-        <script src="/static/index.js"></script>
+        {% block scripts %}{% endblock %}
     </body>
 </html>

@@ -21,6 +21,8 @@
 
 > https://stackoverflow.com/questions/3715493/encoding-an-image-file-with-base64#3715530
 
+
+> https://stackoverflow.com/questions/70194210/how-to-create-a-2d-numpy-array-of-pixel-values
 ----
 
 
@@ -45,7 +47,12 @@
 
 ## Image in JS
 > https://m.youtube.com/watch?v=alRBeUMMvDM
+> https://stackoverflow.com/q/12368910
+> https://m.youtube.com/watch?v=5Fws9daTtIs
 
-## Cropper framework
+## Cropper JS framework
 > https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js
 > https://m.youtube.com/watch?v=MttSRUarA6g#
+
+## POST with JS
+> https://www.geeksforgeeks.org/javascript/how-to-send-an-http-post-request-in-js/

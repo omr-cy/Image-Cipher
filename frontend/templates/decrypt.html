@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %} Decrypt {% endblock %}
+
+{% block main %}
+    <div id="decrypt-uploader" class="decrypt-uploader">
+        <label for="decrypt-input-file" id="decrypt-drop-area" class="decrypt-drop-area">
+            <input id="decrypt-input-file" type="file" name="filename" accept="image/*" hidden>
+            <div id="decrypt-img-view" class="decrypt-img-view">
+                <img src="/static/images/upload_icon.png" alt="">
+                <p>Choose an encrypted image</p>
+                <span>Upload Image from Device</span>
+            </div>
+        </label>
+    </div>
+
+    <div id="decrypt-viewer" class="decrypt-viewer" hidden>
+        <div id="decrypt-stage">
+            <img id="decrypt-img" src="" alt="Encrypted image preview">
+        </div>
+        <div class="editor-controls">
+            <input id="decrypt-password" type="password" placeholder="Password">
+            <button id="decrypt-btn" type="button">Decrypt</button>
+        </div>
+        <p id="decrypt-progress" role="status" hidden>
+            <span class="loading-spinner" aria-hidden="true"></span>
+            Decrypting image...
+        </p>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/index.js?v=8"></script>
+{% endblock %}

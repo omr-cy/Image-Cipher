@@ -1,17 +1,19 @@
 {% extends "layout.html" %}
 
+{% block title %} Home {% endblock %}
+
 {% block main %}
 
     <!-- Main block in index.html -->
-    <div">
+    <div class="home">
         <p>My name is Omar - and this is Image Cipher</p>
     </div>
-    <div>
+    <div class="page-actions">
         <button>
-            <a href="/encryptor">Encrypt</a>
+            <a href="/encrypt">Encrypt</a>
         </button>
         <button>
-            <a href="/decryptor">Decrypt</a>
+            <a href="/decrypt">Decrypt</a>
         </button>
     </div>
 

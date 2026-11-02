@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %} Encrypt {% endblock %}
+
+
+{% block main %}
+
+    <!-- Main block in index -->
+    <div id="uploader">
+        <label for="input-file" id="drop-area">
+            <input id="input-file" type="file" name="filename" accept="image/*" hidden> 
+            <div id="img-view">
+                <img id="upload-icon" src="/static/images/upload_icon.png">
+                <p>Drag and drop or click here <br>to select from your device</p>
+                <span>Upload Image from Device</span>
+            </div>
+        </label>    
+    </div>
+
+    <div id="cropper-viewer" style="display: none;">
+        <div id="cropper-stage">
+            <img id="origin-img" src="" alt="Image preview">
+        </div>
+       
+        <div class="editor-controls">
+            <input id="password" style="display: none;" type="password" placeholder="Password">
+            <button id="encrypt-btn" style="display: none;">Encrypt</button>
+        </div>
+        <p id="encrypt-progress" role="status" hidden>
+            <span class="loading-spinner" aria-hidden="true"></span>
+            Encrypting image...
+        </p>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/index.js?v=8"></script>
+{% endblock %}

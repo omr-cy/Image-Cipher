@@ -5,7 +5,7 @@
 #     -o pxls_cipher
 
 # This for Python Usage in Linux
-gcc -FPIC -shared\
+gcc -fPIC -shared\
     main.c\
     helpers/helpers.c\
     helpers/sha256_c/sha256.c\
