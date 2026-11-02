@@ -12,14 +12,20 @@ def index():
 	return rt("index.html")
 
 
-@app.route("/encryptor")
+@app.route("/encryptor", methods=["GET", "POST"])
 def encryptor():
-	return rt("encryptor.html")
+	if request.method == "POST":
+		...
+	else:
+		return rt("encryptor.html")
 
 
-@app.route("/decryptor")
+@app.route("/decryptor", methods=["GET", "POST"])
 def decryptor():
-	return rt("decryptor.html")
+	if request.method == "POST":
+		...
+	else:
+		return rt("decryptor.html")
 
 
 @app.route("/api", methods=["POST"])

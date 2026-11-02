@@ -39,3 +39,13 @@
 
 ## json in python
 > https://stackoverflow.com/questions/11197818/how-do-i-make-a-json-object-with-multiple-arrays
+
+----
+
+
+## Image in JS
+> https://m.youtube.com/watch?v=alRBeUMMvDM
+
+## Cropper framework
+> https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js
+> https://m.youtube.com/watch?v=MttSRUarA6g#

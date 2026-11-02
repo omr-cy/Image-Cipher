@@ -21,3 +21,6 @@ I think it's more faster to skipping the ('str to pxsl', 'pxsl to str', 'concate
 تاخذ مصفوفة مرتبة ومفتاح (رقم)
 وبناء على الرقم تقوم الدالة بخلط العناصر وارجاعها في مصفوفة جديدة مخلوطة
 واذا اعطيت الدالة المصفوفة المخلوطة بنفس المفتاح ترجع المصوفة لترتيبها الاصلي
+
+
+## Install `cropper.js` framework and use it in my code
