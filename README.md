@@ -1,6 +1,6 @@
 # Image Cipher
 
-## Video Demo:  <URL HERE>
+## Video Demo:  <https://youtu.be/ee50TfxyVzs>
 
 ## Description:
 
@@ -35,7 +35,7 @@ image as base64 bytes + b"ICMETAS" + Coords.json as base64 bytes + b"ICMETAE"
 
 ----
 
-## My Terrible Explaining
+## My Terrible Explain
 
 ### Backend
 
@@ -66,17 +66,6 @@ i also added `Cropper JS` Frame work to save my time and taking the selected par
 - the API between the frontend and the backend,
 - it handells the errors that may come form the user,
 
-
-### Design Decisions
-
-During the development of this project, one of the most critical architectural decisions involved determining the most efficient way to handle and transfer data between the frontend, the Python backend, and the C processing layer. 
-
-**The Alternative Considered (Raw Pixel Arrays via JSON):**
-Initially, I experimented with sending raw pixel data directly from the frontend as a JSON array. However, this approach introduced significant performance bottlenecks. Transmitting pixel data as JSON massively bloats the payload size—often increasing it to two or three times the original size. Since each pixel requires approximately 3 bytes for RGB values and must be serialized into text-based JSON integers, the overhead for serialization, network transfer, and deserialization became unacceptably high and inefficient.
-
-**The Chosen Approach (Image & Bounding Coordinates):**
-To resolve this, I opted for a much more lightweight and efficient approach: sending the image file itself along with precise bounding box coordinates (`x`, `y`, `width`, and `height`). Instead of serializing every single pixel into a heavy JSON structure, the frontend simply passes the image file and the target coordinates to Python, which then forwards them to the C layer. This drastically reduces payload size, minimizes memory overhead, and ensures fast, seamless communication and processing.
-
 ----
 
 ## Honesty
@@ -95,9 +84,9 @@ With The `Javascipt` i wrote the core of the functions and i got a good imporved
 
 I tried to keep on the Convension like adding `helpers.c`, `helpers.py` and `baakend`, `frontend` folders, `static` and ....
 
-> What i learned: `/Image-Cipher/Resources.md` 
+> What i learned: `/Image-Cipher/resources.md` 
 
-> My Pseudocodes: `/Image-Cipher/Pseudocodes.pdf`
+> My Pseudocodes: `/Image-Cipher/pseudocode`
 
 ---
 
@@ -108,7 +97,3 @@ I tried to mex all what i learned with cs50 in one project.
 **I truly thank you guys from my heart for this exciting journey.**
 
 And yeah, I love writing in Markdown cause im using Obsidian for my notes.
-
-
-
-
