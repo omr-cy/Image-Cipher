@@ -129,6 +129,7 @@ def cypher(img_base64, coords, passwd):
 
 
 def decipher(img_base64, passwd):
+    # the Truth is it with AI
     bounds = _metadata_bounds(img_base64)
     if bounds is None:
         raise ValueError("This image is not encrypted or its metadata is invalid.")

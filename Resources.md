@@ -1,6 +1,5 @@
 # Some Usiful Resources
 
-
 ## Sha256 in C
 
 > https://lucidar.me/en/dev-c-cpp/sha-256-in-c-cpp/#top
@@ -21,8 +20,8 @@
 
 > https://stackoverflow.com/questions/3715493/encoding-an-image-file-with-base64#3715530
 
-
 > https://stackoverflow.com/questions/70194210/how-to-create-a-2d-numpy-array-of-pixel-values
+
 ----
 
 
@@ -56,3 +55,4 @@
 
 ## POST with JS
 > https://www.geeksforgeeks.org/javascript/how-to-send-an-http-post-request-in-js/
+
