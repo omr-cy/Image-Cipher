@@ -72,15 +72,19 @@ i also added `Cropper JS` Frame work to save my time and taking the selected par
 
 The Idea Is complete 100% from me.
 
-I wrote 95% of the code in C, except for the SHA256 library, which I downloaded from this link <https://lucidar.me/en/dev-c-cpp/sha-256-in-c-cpp/#top>
+I wrote 95% of the code in `C`, except the SHA256 library, which I downloaded from this link <https://lucidar.me/en/dev-c-cpp/sha-256-in-c-cpp/#top>
 
-So in python Almost of the code by me except the decrypt i got alot help from the AIs, But I reviewed and checked it
+in `Python` %95 of the code by me.
 
-Immm With the `CSS` for Honesty I'm a terrible front-end designer, so i got help with the AIs, and with the wonderful Framework (Cropper.js) it's saved me alot of time.
+for Honesty I'm a terrible front-end designer
+	Immm `CSS` for Honesty I'm a terrible front-end designer, so i got help with the AI, 
+	`HTML` All pages from me, except the decrypt page because it's jsut like copy and pest.
+	Immm `Javascipt` all from the AI, and also with the wonderful Framework (Cropper.js) it's saved me alot of time.
 
-With `HTML` All pages from me, except the decrypt page because it's jsut like copy and pest.
 
-With The `Javascipt` i wrote the core of the functions and i got a good imporved from the AIs
+Also for Honesty not all of the JS, CSS code i understand it, i understand the Cropper.js functions but some of the Async functions i can't yet understand it.
+but i just wont to add a user interface for the  project. 
+
 
 I tried to keep on the Convension like adding `helpers.c`, `helpers.py` and `baakend`, `frontend` folders, `static` and ....
 
